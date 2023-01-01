@@ -11,7 +11,7 @@ import static pagetoautomate.homepage.FirstForm.OptionRadio.OPTION_3;
 
 public class PageToAutomateTest extends TestBase {
 
-    HomePage homePage = new HomePage();
+    private final HomePage homePage = new HomePage();
 
     @Before
     public void openHomePage() {
