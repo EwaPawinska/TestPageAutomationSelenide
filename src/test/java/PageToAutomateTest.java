@@ -4,6 +4,7 @@ import pagetoautomate.HomePage;
 import pagetoautomate.homepage.FirstForm;
 
 import static com.codeborne.selenide.Selenide.open;
+import static pagetoautomate.homepage.FirstForm.AcceptPolicy.YES;
 import static pagetoautomate.homepage.FirstForm.Browser.*;
 import static pagetoautomate.homepage.FirstForm.FavoriteDayOfTheWeekDropdown.FRIDAY;
 import static pagetoautomate.homepage.FirstForm.OptionRadio.OPTION_3;
@@ -32,5 +33,7 @@ public class PageToAutomateTest extends TestBase {
         firstForm.selectRadioOption(OPTION_3);
         firstForm.selectFavoriteDayOfTheWeek(FRIDAY);
         firstForm.selectManyBrowsers(CHROME, FIREFOX, EDGE, OPERA);
+        firstForm.getDescriptionTextarea().setValue("opis");
+        firstForm.acceptPolicy(YES);
     }
 }

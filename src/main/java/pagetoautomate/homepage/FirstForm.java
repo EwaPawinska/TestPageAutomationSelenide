@@ -16,6 +16,8 @@ public class FirstForm {
     private final SelenideElement optionRadio = $("input[name='option']");
     private final SelenideElement dayOfTheWeekDropdown = $("select[name='dayOfTheWeek']");
     private final SelenideElement browserMultiSelect = $("select[id='browser-select-multiple']");
+    private final SelenideElement descriptionTextarea = $("textarea#description-text").as("Napisz coś");
+    private final SelenideElement acceptPrivacyPolicyRadio = $("input[name='confirmation']");
 
     public void selectRadioOption(OptionRadio chosenOption) {
         optionRadio.selectRadio(chosenOption.option);
@@ -33,6 +35,10 @@ public class FirstForm {
                     .press(Keys.CONTROL)
                     .selectOptionByValue(browser.browserName);
         }
+    }
+
+    public void acceptPolicy(AcceptPolicy acceptPolicy) {
+        acceptPrivacyPolicyRadio.selectRadio(acceptPolicy.value);
     }
 
     @AllArgsConstructor
@@ -60,7 +66,7 @@ public class FirstForm {
     @AllArgsConstructor
     public enum FavoriteDayOfTheWeekDropdown {
 
-        MONDAY("Pooniedziałek"),
+        MONDAY("Poniedziałek"),
         TUESDAY("Wtorek"),
         WEDNESDAY("Środa"),
         THURSDAY("Czwartek"),
@@ -69,5 +75,14 @@ public class FirstForm {
         SUNDAY("Niedziela");
 
         private final String dayName;
+    }
+
+    @AllArgsConstructor
+    public enum AcceptPolicy {
+
+        YES("Tak"),
+        NO("Nie");
+
+        private final String value;
     }
 }
