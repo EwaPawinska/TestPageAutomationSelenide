@@ -1,11 +1,15 @@
 package pagetoautomate.homepage;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selenide.$;
+import java.util.Objects;
+
+import static com.codeborne.selenide.Selenide.*;
 
 @Getter
 public class FirstForm {
@@ -18,6 +22,9 @@ public class FirstForm {
     private final SelenideElement browserMultiSelect = $("select[id='browser-select-multiple']");
     private final SelenideElement descriptionTextarea = $("textarea#description-text").as("Napisz coś");
     private final SelenideElement acceptPrivacyPolicyRadio = $("input[name='confirmation']");
+    private final ElementsCollection groupsCheckboxes = $$("input[name='group[]']");
+    private final SelenideElement doNothingButton = $("input#nothing-submit");
+    private final SelenideElement errorMessage = $x(".//div[contains(text(), 'Wystąpił problem')]");
 
     public void selectRadioOption(OptionRadio chosenOption) {
         optionRadio.selectRadio(chosenOption.option);
@@ -35,6 +42,19 @@ public class FirstForm {
                     .press(Keys.CONTROL)
                     .selectOptionByValue(browser.browserName);
         }
+    }
+
+    public void selectAllCheckboxesWithValue(String value) {
+        $$("input[type='checkbox']")
+                .asFixedIterable()
+                .stream()
+                .filter(e -> Objects.requireNonNull(e.getAttribute("value")).equals(value))
+                .forEach(SelenideElement::click);
+    }
+
+    public void selectGroup(int groupNumber) {
+        String groupName = "Grupa " + groupNumber;
+        groupsCheckboxes.findBy(Condition.value(groupName)).click();
     }
 
     public void acceptPolicy(AcceptPolicy acceptPolicy) {

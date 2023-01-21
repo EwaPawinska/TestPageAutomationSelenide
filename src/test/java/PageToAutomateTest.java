@@ -1,3 +1,5 @@
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import pagetoautomate.HomePage;
@@ -15,6 +17,7 @@ public class PageToAutomateTest extends TestBase {
 
     @Before
     public void openHomePage() {
+        Configuration.headless = true;
         open("https://programautomatycy.pl/test-page/");
     }
 
@@ -27,6 +30,7 @@ public class PageToAutomateTest extends TestBase {
     public void fillFirstFormWithCorrectData() {
         FirstForm firstForm = homePage.getFirstForm();
 
+        homePage.acceptCookies();
         firstForm.getFirstNameInput().setValue("Ewa");
         firstForm.getSecondNameInput().setValue("nie ma");
         firstForm.getLastNameInput().setValue("Nowakowska");
@@ -35,5 +39,9 @@ public class PageToAutomateTest extends TestBase {
         firstForm.selectManyBrowsers(CHROME, FIREFOX, EDGE, OPERA);
         firstForm.getDescriptionTextarea().setValue("opis");
         firstForm.acceptPolicy(YES);
+        firstForm.selectAllCheckboxesWithValue("C");
+        firstForm.selectGroup(2);
+        firstForm.getDoNothingButton().click();
+        firstForm.getErrorMessage().shouldBe(Condition.visible);
     }
 }
