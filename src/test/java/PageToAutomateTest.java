@@ -17,7 +17,6 @@ public class PageToAutomateTest extends TestBase {
 
     @Before
     public void openHomePage() {
-        Configuration.headless = true;
         open("https://programautomatycy.pl/test-page/");
     }
 
