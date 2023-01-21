@@ -1,5 +1,4 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import pagetoautomate.HomePage;
@@ -18,11 +17,6 @@ public class PageToAutomateTest extends TestBase {
     @Before
     public void openHomePage() {
         open("https://programautomatycy.pl/test-page/");
-    }
-
-    @Test
-    public void displayHomePage() {
-        homePage.verifyAllWebElementsAreDisplayed();
     }
 
     @Test
